@@ -1,0 +1,2 @@
+# ZOM
+ZOM Cryptocurrency
