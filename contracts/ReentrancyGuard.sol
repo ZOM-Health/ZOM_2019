@@ -7,10 +7,9 @@ pragma solidity ^0.5.0;
  * mark it `external`.
  */
 contract ReentrancyGuard {
-    /// @dev counter to allow mutex lock with only one SSTORE operation
     uint256 private _guardCounter;
 
-    constructor () internal {
+    constructor() internal {
         // The counter starts at one to prevent changing it from zero to a non-zero
         // value, which is a more expensive operation.
         _guardCounter = 1;

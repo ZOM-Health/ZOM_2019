@@ -19,7 +19,6 @@ contract ERC20 is IERC20 {
     using SafeMath for uint256;
 
     mapping (address => uint256) private _balances;
-
     mapping (address => mapping (address => uint256)) private _allowed;
 
     uint256 private _totalSupply;

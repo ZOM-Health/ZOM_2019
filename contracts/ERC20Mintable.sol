@@ -5,7 +5,7 @@ import "./MinterRole.sol";
 
 /**
  * @title ERC20Mintable
- * @dev ERC20 minting logic
+ * @dev ERC20 minting logic smart contract
  */
 contract ERC20Mintable is ERC20, MinterRole {
     /**
