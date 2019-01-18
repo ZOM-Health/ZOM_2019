@@ -71,7 +71,6 @@ contract Reward is ReentrancyGuard {
         emit NewTokensMinted(holder, tokensAmount);
     }
 
-
     // -----------------------------------------
     // GETTERS
     // -----------------------------------------
