@@ -1,2 +1,2 @@
 # ZOM
-ZOM Cryptocurrency
+ZOM PoS Sidechain
