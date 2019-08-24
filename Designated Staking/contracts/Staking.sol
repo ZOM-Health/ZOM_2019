@@ -3,6 +3,7 @@ pragma solidity ^0.5.0;
 import "./SafeMath.sol";
 import "./SafeERC20.sol";
 import "./IERC20.sol";
+import "./WhitelistedRole.sol";
 
 /**
  * @title Staking smart contract
