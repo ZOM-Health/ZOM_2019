@@ -8,6 +8,10 @@ contract MedicalPass is Ownable   {
     
     using SafeMath for uint256;
     ERC20 public ZOM;
+    
+    address public renewPassAddress;
+     address public upgardePassAddress;
+
 
     
     struct Pass {
@@ -17,15 +21,20 @@ contract MedicalPass is Ownable   {
         uint256 expiryTimestamp;
     }
 
-    uint256 bronzePass = 500 * 10 * 18;
-    uint256 silverPass = 1000* 10 * 18;
-    uint256 goldPass = 2000* 10 * 18;
+    uint256 public bronzePass = 500 * 10 * 18;
+    uint256 public silverPass = 1000* 10 * 18;
+    uint256 public goldPass = 2000* 10 * 18;
     
     uint256 thirtyDaysToUnix=2592000;
     
    
     Pass[] public issuedPasses;
-    mapping(address => uint256) private addressToPass;
+    mapping(address => uint256) public addressToPass;
+    
+    modifier onlyRenewPassOrUpgradePassOrOwner {
+        require(msg.sender == renewPassAddress|| msg.sender == owner || msg.sender == upgardePassAddress);
+        _;
+    }
 
     
     constructor (ERC20 _token) public {
@@ -72,67 +81,31 @@ contract MedicalPass is Ownable   {
     function compareStrings (string memory a, string memory b) public view returns (bool) {
         return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))) );
        }
-    
-    function upgradePass(string memory _upgradeTo) public{
-        uint256 index = getIndexByAddress(msg.sender);
-        require(index !=0);
-        if(compareStrings(_upgradeTo , "silver")){
-            uint tokenAllowance = ZOM.allowance(msg.sender, address(this));
-             require(tokenAllowance >= silverPass);
-             ZOM.transferFrom(msg.sender, address(this), tokenAllowance);
-             issuedPasses[index].passType = "silver";
-             issuedPasses[index].issuedTimestamp = block.timestamp;
-             issuedPasses[index].expiryTimestamp= block.timestamp + thirtyDaysToUnix;
 
-        }else if(compareStrings(_upgradeTo , "gold")){
-             uint tokenAllowance = ZOM.allowance(msg.sender, address(this));
-             require(tokenAllowance >= goldPass);
-             ZOM.transferFrom(msg.sender, address(this), tokenAllowance);
-             issuedPasses[index].passType = "gold";
-             issuedPasses[index].issuedTimestamp = block.timestamp;
-             issuedPasses[index].expiryTimestamp= block.timestamp + thirtyDaysToUnix;
-        }else{
-            return;
-        }
+    
+      function setUpgradePassAddress(address _upgardePassAddress) public onlyOwner {
+        upgardePassAddress = _upgardePassAddress;
     }
     
-    function renewPass() public {
-        uint256 index = getIndexByAddress(msg.sender);
-        require(index !=0);
-        if(compareStrings(issuedPasses[index].passType, "bronze")){
-            
-             uint tokenAllowance = ZOM.allowance(msg.sender, address(this));
-             require(tokenAllowance >= bronzePass);
-             ZOM.transferFrom(msg.sender, address(this), tokenAllowance);
-             issuedPasses[index].passType = "bronze";
+    function setRenewPassAddress(address _renewPassAddress) public onlyOwner {
+        renewPassAddress = _renewPassAddress;
+    }
+    
+    function renewOrUpgrade(uint256 index ,string memory _passType , uint256 _issuedTimestamp , uint256 _expiryTimestamp) public onlyRenewPassOrUpgradePassOrOwner {
+          issuedPasses[index].passType = "goldPass";
              issuedPasses[index].issuedTimestamp = block.timestamp;
              issuedPasses[index].expiryTimestamp= block.timestamp + thirtyDaysToUnix;
-             
-        } else if(compareStrings(issuedPasses[index].passType, "silver")){
-            
-             uint tokenAllowance = ZOM.allowance(msg.sender, address(this));
-             require(tokenAllowance >= silverPass);
-             ZOM.transferFrom(msg.sender, address(this), tokenAllowance);
-             issuedPasses[index].passType = "silver";
-             issuedPasses[index].issuedTimestamp = block.timestamp;
-             issuedPasses[index].expiryTimestamp= block.timestamp + thirtyDaysToUnix;
-             
-        } else if(compareStrings(issuedPasses[index].passType, "gold")){
-            
-             uint tokenAllowance = ZOM.allowance(msg.sender, address(this));
-             require(tokenAllowance >= goldPass);
-             ZOM.transferFrom(msg.sender, address(this), tokenAllowance);
-             issuedPasses[index].passType = "goldPass";
-             issuedPasses[index].issuedTimestamp = block.timestamp;
-             issuedPasses[index].expiryTimestamp= block.timestamp + thirtyDaysToUnix;
-        } 
-
     }
     
     function getIndexByAddress(address owner) public view returns(uint256){
         return addressToPass[owner];
     }
     
+    function getPassTypeByIndex(uint256 index) public view returns(string memory){
+        return issuedPasses[index].passType;
+    }
+    
       
 }
+
 
