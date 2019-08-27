@@ -13,3 +13,4 @@ Path 2 - ZOM Gold: A blockchain created that improvises from the findings taken 
 
 Yazom does not own ZOM but rather is the chief governor of ZOM with additional parties welcome to participate in realizing the goal. 
 
+Yazom currently owns an estimated 8% of the total supply of ZOM.
