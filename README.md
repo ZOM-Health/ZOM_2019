@@ -1,5 +1,5 @@
 # ZOM
-ZOM is the premier cryptocurrency initiative put forward by Yazom Limited - a health and wellness technology company located on the Caribbean Island of Jamaica.
+ZOM is the premier digital currency initiative put forward by Yazom Limited - a health and wellness technology company located on the Caribbean Island of Jamaica.
 
 ZOM’s aim is to reduce costs while maintaining factual and objective data regarding activities surrounding health and wellness activities. 
 
