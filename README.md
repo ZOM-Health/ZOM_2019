@@ -1,9 +1,9 @@
 # ZOM
-ZOM is the cryptocurrency initiative put forward by Yazom Limited - a health and wellness technology company located on the Caribbean Island of Jamaica.
+ZOM is the premier cryptocurrency initiative put forward by Yazom Limited - a health and wellness technology company located on the Caribbean Island of Jamaica.
 
 ZOM’s aim is to reduce costs while maintaining factual and objective data regarding activities surrounding health and wellness activities. 
 
-In the simplest terms, ZOM can be expressed as an alternative to health insurance with added benefits of security, integrity and an extension by promoting wellness objectives.
+In the simplest terms, ZOM can be expressed as an alternative to health and wellness insurance with added benefits of security and integrity.
 
 ZOM currently proposes a path of two (2): ZOM Silver and ZOM Gold.
 
